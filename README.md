@@ -24,7 +24,7 @@ Can't sleep at night because you haven't learned Docker yet?
 4. Open your browser to [http://192.168.169.170](http://192.168.169.170) and you should see something like this: 
   ![development environment](http://i.imgur.com/0Wi7qaI.png)
   This is just a stripped-down development environment inside our vm where we can edit files and run things from its terminal.  We won't use the 'debug', 'run', 'deploy', etc., icons.  For us, it's just a text editor and terminal.
-5. Open a terminal window and run 'docker version' to verify that the docker command is available.  You should see something like this.
+5. Open a terminal window (*File->New Terminal*)and run 'docker version' to verify that the docker command is available.  You should see something like this.
   ![docker version](http://i.imgur.com/yErxegW.png)
 6. Go back to your laptop's terminal, where you ran 'vagrant up' earlier, and run `vagrant halt` to shutdown the vm we created
 
