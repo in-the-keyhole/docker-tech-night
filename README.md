@@ -26,7 +26,7 @@ Can't sleep at night because of the guilt and embarrassment of not having learne
   - This is just a stripped-down development environment inside our vm where we can edit files and run things from its terminal.  We won't use the 'debug', 'run', 'deploy', etc., icons.  For us, it's just a text editor and terminal.
 5. Open a terminal window and run 'docker version' to verify that the docker command is available.  You should see something like this.
 
-6. Go back to your laptop's shell, where you ran 'vagrant up' earlier, and run `vagrant halt` to shutdown the vm we created
+6. Go back to your laptop's terminal, where you ran 'vagrant up' earlier, and run `vagrant halt` to shutdown the vm we created
 
 ***
 
