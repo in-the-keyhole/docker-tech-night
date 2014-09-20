@@ -20,7 +20,8 @@ Can't sleep at night because of the guilt and embarrassment of not having learne
   3. Vagrant >= 1.6.5 - [https://www.vagrantup.com/](https://www.vagrantup.com/)
     - *once installed, run `vagrant version` to see version info*
 2. `git clone` this repo
-3. Run `vagrant up` and then wait and wait (well, hopefully, if nothing goes wrong this will take quite a while).  Here's what it looked like when I ran in on my laptop - [https://asciinema.org/a/12321](https://asciinema.org/a/12321).
+3. Run `vagrant up` and then wait and wait (well, hopefully, if nothing goes wrong this will take quite a while).  Here's what it looked like when I ran on my laptop - [https://asciinema.org/a/12321](https://asciinema.org/a/12321).
+
 4. Open your browser to [http://192.168.169.170](http://192.168.169.170) and you should see something like this: 
   - This is just a stripped-down development environment inside our vm where we can edit files and run things from its terminal.  We won't use the 'debug', 'run', 'deploy', etc., icons.  For us, it's just a text editor and terminal.
 5. Open a terminal window and run 'docker version' to verify that the docker command is available.  You should see something like this.
