@@ -20,13 +20,13 @@ Can't sleep at night because you haven't learned Docker yet?
     - *once installed, run `vagrant version` to see version info*
 2. `git clone` this repo
 3. Run `vagrant up` and then wait and wait (well, hopefully, if nothing goes wrong this will take quite a while).  Here's what it looked like when I ran on my laptop - [video](https://asciinema.org/a/12321).
-  ![vagrant up](http://i.imgur.com/qC2DIlK.png)
+  ![vagrant up](http://i.imgur.com/yXaVBBI.png)
 4. Open your browser to [http://192.168.169.170](http://192.168.169.170) and you should see something like this: 
   ![development environment](http://i.imgur.com/0Wi7qaI.png)
   This is just a stripped-down development environment inside our vm where we can edit files and run things from its terminal.  We won't use the 'debug', 'run', 'deploy', etc., icons.  For us, it's just a text editor and terminal.
 5. Open a terminal window (*File->New Terminal*) and run 'docker version' to verify that the docker command is available.  You should see something like this.
   ![docker version](http://i.imgur.com/yErxegW.png)
-  :thumbsup:
+  :thumbsup::thumbsup::thumbsup:
 6. Go back to your laptop's terminal, where you ran 'vagrant up' earlier, and run `vagrant halt` to shutdown the vm we created
 
 ***
