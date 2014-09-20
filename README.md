@@ -1,6 +1,6 @@
 # Keyhole Software Docker Tech Night
 
-Can't sleep at night because of the guilt and embarrassment of not having learned Docker yet?  Well, we're here for you.  You CAN redeem yourself.  We'll get through this together.
+Can't sleep at night because you haven't learned Docker yet?  Well, we're here for you.  You CAN redeem yourself.  We'll get through this together.
 
 
 ***
