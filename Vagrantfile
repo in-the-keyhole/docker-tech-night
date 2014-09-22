@@ -10,7 +10,7 @@ then
     set -eufx -o pipefail
     apt-get update
     # install some general tools
-    apt-get install --yes git tree htop
+    apt-get install --yes git tree htop curl
     # install fig
     curl -L https://github.com/docker/fig/releases/download/0.5.2/linux > /usr/local/bin/fig
     chmod +x /usr/local/bin/fig
