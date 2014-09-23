@@ -1,4 +1,4 @@
-
+`export PS1="\W$"`
 
 
 # `docker build`
