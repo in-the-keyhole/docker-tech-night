@@ -1,5 +1,10 @@
 `export PS1="\W$ "`
 
+zoom - 150%
+theme - white
+terminal: theme - solarized_light, font size - 20
+
+
 `while true ; do nc -l 80 < index.html ; done`
 
 `while true ; do nc -l 8888 <<<hello ; done`
