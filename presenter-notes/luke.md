@@ -1,5 +1,7 @@
 `export PS1="\W$"`
 
+`while true ; do nc -l 80 < index.html ; done`
+`while true ; do nc -l 8888 <<<hello ; done`
 
 # `docker build`
 # `docker commit`
@@ -27,4 +29,3 @@
 # `docker tag`
 # `docker top`
 # `docker version`
-
