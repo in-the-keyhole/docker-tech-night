@@ -14,12 +14,12 @@ is docker installed?  what version are we using?
 # `docker version`
 
 ```
-vagrant$ docker version                                                                                                         
-Client version: 1.2.0                                                                                                           
-Client API version: 1.14                                                                                                        
-Go version (client): go1.3.1                                                                                                    
-Git commit (client): fa7b24f                                                                                                    
-OS/Arch (client): linux/amd64                                                                                                   
+vagrant$ docker version                                                                                             
+Client version: 1.2.0                                                                                               
+Client API version: 1.14                                                                                            
+Go version (client): go1.3.1                                                                                        
+Git commit (client): fa7b24f                                                                                        
+OS/Arch (client): linux/amd64     
 Server version: 1.2.0                                                                                                           
 Server API version: 1.14                                                                                                        
 Go version (server): go1.3.1                                                                                                    
@@ -95,6 +95,8 @@ vagrant$ curl localhost:27017
 curl: (7) Failed to connect to localhost port 27017: Connection refused  
 ```
 
+try robomongo too
+
 let's stop it
 # `docker stop`
 
@@ -123,6 +125,27 @@ CONTAINER ID        IMAGE               COMMAND                CREATED          
 357005e56062        mongo:2.7.5         "/entrypoint.sh mong   37 seconds ago      Up 3 seconds        27017/tcp           compassionate_tesla             
 vagrant$     
 ```
+
+can we inspect the running app?
+# `docker inspect`
+
+```
+vagrant$ docker inspect 357
+...
+```
+
+what does the app look like to the os?
+
+```
+htop
+
+find the app with kill -9 the app
+```
+
+docker ps to see that it is gone
+
+
+
 
 
 or we can also stop it via ctrl-c, assuming the container isn't catching those keys (e.g. a shell)
@@ -284,7 +307,71 @@ root@d9501c8210b9:/#
 vagrant$ docker run --interactive --tty ubuntu:14.04 ls                                                                                                    
 bin   dev  home  lib64  mnt  proc  run   srv  tmp  var                                                                                                     
 boot  etc  lib   media  opt  root  sbin  sys  usr   
+vagrant$ docker run --interactive --tty ubuntu:14.04 /bin/bash
+tree
+
+    `-- tmp                                                                                                                                                                                        
+                                                                                                                                                                                                   
+4544 directories, 24325 files                                                                                                                                                                      
+root@caf547d2063b:/# exit                                                                                                                                                                          
+exit                                                                                                                                                                                               
+vagrant$ docker run --interactive --tty ubuntu:14.04 /bin/bash                                                                                                                                     
+root@44ecb7964ea5:/# apt-get update                                                                                                                                                                
+Ign http://archive.ubuntu.com trusty InRelease                                                                                                                                                     
+Ign http://archive.ubuntu.com trusty-updates InRelease                                                                                                                                             
+Ign http://archive.ubuntu.com trusty-security InRelease                                                                                                                                            
+Ign http://archive.ubuntu.com trusty-proposed InRelease                                                                                                                                            
+Get:1 http://archive.ubuntu.com trusty Release.gpg [933 B]                                                                                                                                         
+Get:2 http://archive.ubuntu.com trusty-updates Release.gpg [933 B]                                                                                                                                 
+Get:3 http://archive.ubuntu.com trusty-security Release.gpg [933 B]                                                                                                                                
+Get:4 http://archive.ubuntu.com trusty-proposed Release.gpg [933 B]                                                                                                                                
+Get:5 http://archive.ubuntu.com trusty Release [58.5 kB]                                                                                                                                           
+Get:6 http://archive.ubuntu.com trusty-updates Release [59.7 kB]                                                                                                                                   
+Get:7 http://archive.ubuntu.com trusty-security Release [59.7 kB]                                                                                                                                  
+Get:8 http://archive.ubuntu.com trusty-proposed Release [110 kB]                                                                                                                                   
+Get:9 http://archive.ubuntu.com trusty/main Sources [1335 kB]                                                                                                                                      
+Get:10 http://archive.ubuntu.com trusty/restricted Sources [5335 B]                                                                                                                                
+Get:11 http://archive.ubuntu.com trusty/universe Sources [7926 kB]                                                                                                                                 
+Get:12 http://archive.ubuntu.com trusty/main amd64 Packages [1743 kB]                                                                                                                              
+Get:13 http://archive.ubuntu.com trusty/restricted amd64 Packages [16.0 kB]                                                                                                                        
+Get:14 http://archive.ubuntu.com trusty/universe amd64 Packages [7589 kB]                                                                                                                          
+Get:15 http://archive.ubuntu.com trusty-updates/main Sources [155 kB]                                                                                                                              
+Get:16 http://archive.ubuntu.com trusty-updates/restricted Sources [1250 B]                                                                                                                        
+Get:17 http://archive.ubuntu.com trusty-updates/universe Sources [105 kB]                                                                                                                          
+Get:18 http://archive.ubuntu.com trusty-updates/main amd64 Packages [410 kB]                                                                                                                       
+Get:19 http://archive.ubuntu.com trusty-updates/restricted amd64 Packages [6341 B]                                                                                                                 
+Get:20 http://archive.ubuntu.com trusty-updates/universe amd64 Packages [266 kB]                                                                                                                   
+Get:21 http://archive.ubuntu.com trusty-security/main Sources [54.1 kB]                                                                                                                            
+Get:22 http://archive.ubuntu.com trusty-security/restricted Sources [40 B]                                                                                                                         
+Get:23 http://archive.ubuntu.com trusty-security/universe Sources [11.4 kB]                                                                                                                        
+Get:24 http://archive.ubuntu.com trusty-security/main amd64 Packages [182 kB]                                                                                                                      
+Get:25 http://archive.ubuntu.com trusty-security/restricted amd64 Packages [40 B]                                                                                                                  
+Get:26 http://archive.ubuntu.com trusty-security/universe amd64 Packages [59.8 kB]                                                                                                                 
+Get:27 http://archive.ubuntu.com trusty-proposed/main amd64 Packages [169 kB]                                                                                                                      
+Get:28 http://archive.ubuntu.com trusty-proposed/restricted amd64 Packages [40 B]                                                                                                                  
+Fetched 20.3 MB in 25s (799 kB/s)                                                                                                                                                                  
+Reading package lists... Done                                                                                                                                                                      
+root@44ecb7964ea5:/# apt-get install tree                                                                                                                                                          
+Reading package lists... Done                                                                                                                                                                      
+Building dependency tree                                                                                                                                                                           
+Reading state information... Done                                                                                                                                                                  
+The following NEW packages will be installed:                                                                                                                                                      
+  tree                                                                                                                                                                                             
+0 upgraded, 1 newly installed, 0 to remove and 5 not upgraded.                                                                                                                                     
+Need to get 37.8 kB of archives.                                                                                                                                                                   
+After this operation, 109 kB of additional disk space will be used.                                                                                                                                
+Get:1 http://archive.ubuntu.com/ubuntu/ trusty/universe tree amd64 1.6.0-1 [37.8 kB]                                                                                                               
+Fetched 37.8 kB in 0s (104 kB/s)                                                                                                                                                                   
+Selecting previously unselected package tree.                                                                                                                                                      
+(Reading database ... 11518 files and directories currently installed.)                                                                                                                            
+Preparing to unpack .../tree_1.6.0-1_amd64.deb ...                                                                                                                                                 
+Unpacking tree (1.6.0-1) ...                                                                                                                                                                       
+Setting up tree (1.6.0-1) ...                                                                                                                                                                      
+root@44ecb7964ea5:/#               
+
 ```
+
+
 
 even another backtrace, so where are those containers, are they gone?
 no, for a couple reasons  - 1, we didn't delete them, we only stopped them / they stopped, 2 - we didn't specify the --rm flag when we ran them
@@ -518,7 +605,7 @@ vagrant$
 # `docker search`
 # `docker push`
 # `docker login`
-sure, _we_ can run it, but how can we distrubute it?
+sure, _we_ can run it, but how can we distribute it?
 
 ```
 vagrant$ docker tag myapp lukewpatterson/myapp 
@@ -551,6 +638,13 @@ lukewpatterson/myapp                 0
 vagrant$   
 ```
 
+ok, so i pushed, where did it go?
+
+https://hub.docker.com/u/lukewpatterson/
+
+
+
+
 so, i 'push'ed, now you pull
 # `docker pull`
 you pull it, look at history, and run it
@@ -580,10 +674,316 @@ vagrant$
 ```
 
 
+# env vars
+
+how do we configure ready to go containers? a few ways, args to the command, files, and env vars
+we'll cover files next, but first let's look at env vars
+
+```
+vagrant$ docker run ubuntu:14.04 /usr/bin/printenv                                                                                                                                                 
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin                                                                                                                                  
+HOSTNAME=595d6e6972fc                                                                                                                                                                              
+HOME=/root                                                                                                                                                                                         
+vagrant$ docker run --env HOWDY=THERE ubuntu:14.04 /usr/bin/printenv                                                                                                                               
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin                                                                                                                                  
+HOSTNAME=abaafcc95634                                                                                                                                                                              
+HOWDY=THERE                                                                                                                                                                                        
+HOME=/root                                                                                                                                                                                         
+vagrant$     
+```
+
+so, if your app relied on the env var HOWDY, you can change behavior
+
+
+
+# files
+
+putting them into the container from the host, (so far we haven't seen any of environments' files show up in the container)
+retrieving them from the container, and also see what files have changed since 'run'
+
+
+
+about "changes"
+# `docker diff`
+
+what about deletion, well first what can we delete? how can we see what's available to 'rm'?
+
+
+right 
+
+```
+
+vagrant$ docker run ubuntu:14.04 ls                                                                                                                              
+bin                                                                                                                                                                                                
+boot                                                                                                                                                                                               
+dev                                                                                                                                                                                                
+etc                                                                                                                                                                                                
+home                                                                                                                                                                                               
+lib                                                                                                                                                                                                
+lib64                                                                                                                                                                                              
+media                                                                                                                                                                                              
+mnt                                                                                                                                                                                                
+opt                                                                                                                                                                                                
+proc                                                                                                                                                                                               
+root                                                                                                                                                                                               
+run                                                                                                                                                                                                
+sbin                                                                                                                                                                                               
+srv                                                                                                                                                                                                
+sys                                                                                                                                                                                                
+tmp                                                                                                                                                                                                
+usr                                                                                                                                                                                                
+var                                                                                                                                                                                                
+   
+vagrant$ docker run ubuntu:14.04 rm -rf /home                                                                                                                                                      
+vagrant$ docker ps -l                                                                                                                                                                              
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES                                                               
+55cdc71a84ad        ubuntu:14.04        "rm -rf /home"      2 seconds ago       Exited (0) 2 seconds ago                       determined_carson                                                   
+vagrant$ docker diff 55c                                                                                                                                                                           
+D /home                                                                                                                                                                                            
+vagrant$    
+```
+
+that was delete, now what about add?
+
+so, to demonstrate, let me create a file, what is cheesy way to do it from command line?  right, echo and redirect
+
+```
+vagrant$ echo wow > myfile.txt                                                                                                                                                                     
+vagrant$ cat myfile.txt                                                                                                                                                                            
+wow                                                                                                                                                                                                
+vagrant$ docker run ubuntu:14.04 /bin/bash -c "echo wombat > animal.txt"                                                                                                                           
+vagrant$ docker ps -l                                                                                                                                                                              
+CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS                     PORTS               NAMES                                                            
+88e89bbc7f17        ubuntu:14.04        "/bin/bash -c 'echo    5 seconds ago       Exited (0) 4 seconds ago                       elegant_ptolemy                                                  
+vagrant$ docker diff 88e                                                                                                                                                                           
+A /animal.txt                                                                                                                                                                                      
+vagrant$                                                                                                                                                                                           
+```
+
+ok, so docker knows a file was added
+
+# `docker cp`
+
+so how do we grab that file?
+
+
+```
+vagrant$ docker cp 88e:animal.txt .                                                                                                                                                                
+vagrant$ ls                                                                                                                                                                                        
+Dockerfile  README.md  Vagrantfile  aasdlfksadf.txt  animal.txt  exercises  myfile.txt  presenter-notes  somefileomine  thequestions.txt                                                           
+vagrant$ cat animal.txt                                                                                                                                                                            
+wombat                                                                                                                                                                                             
+vagrant$                                                                                                                                                                        ```                   
+
+and there's "C" of course, for changed, let's skip demoing that
+
+
+```
+root@44ecb7964ea5:/# apt-get install tree                                                                                                                                                          
+Reading package lists... Done                                                                                                                                                                      
+Building dependency tree                                                                                                                                                                           
+Reading state information... Done                                                                                                                                                                  
+The following NEW packages will be installed:                                                                                                                                                      
+  tree                                                                                                                                                                                             
+0 upgraded, 1 newly installed, 0 to remove and 5 not upgraded.                                                                                                                                     
+Need to get 37.8 kB of archives.                                                                                                                                                                   
+After this operation, 109 kB of additional disk space will be used.                                                                                                                                
+Get:1 http://archive.ubuntu.com/ubuntu/ trusty/universe tree amd64 1.6.0-1 [37.8 kB]                                                                                                               
+Fetched 37.8 kB in 0s (104 kB/s)                                                                                                                                                                   
+Selecting previously unselected package tree.                                                                                                                                                      
+(Reading database ... 11518 files and directories currently installed.)                                                                                                                            
+Preparing to unpack .../tree_1.6.0-1_amd64.deb ...                                                                                                                                                 
+Unpacking tree (1.6.0-1) ...                                                                                                                                                                       
+Setting up tree (1.6.0-1) ...                                                                                                                                                                      
+root@44ecb7964ea5:/#               
+```
+
+ok, so we saw how docker can diff containers, and grab files from containers
+
+# volumes
+
+we haven't put a file into a container yet, which is kinda important, cause how is a real app gonna run otherwise? think about it, our source code or compiled code needs to be running _inside_ the container
+
+cause we can't do something like this:
+
+```
+vagrant$ echo haha > joke.txt                                                                                                                                                                      
+vagrant$ cat joke.txt                                                                                                                                                                              
+haha                                                                                                                                                                                               
+vagrant$ docker run ubuntu:14.04 cat joke.txt                                                                                                                                                      
+cat: joke.txt: No such file or directory                                                                                                                                                           
+vagrant$              
+```
+
+why not?
+
+
+```
+vagrant$ docker run --volume /vagrant:/vagrant ubuntu:14.04 ls /vagrant                                                                                                                            
+Dockerfile                                                                                                                                                                                         
+README.md                                                                                                                                                                                          
+Vagrantfile                                                                                                                                                                                        
+aasdlfksadf.txt                                                                                                                                                                                    
+animal.txt                                                                                                                                                                                         
+exercises                                                                                                                                                                                          
+joke.txt                                                                                                                                                                                           
+myfile.txt                                                                                                                                                                                         
+presenter-notes                                                                                                                                                                                    
+somefileomine                                                                                                                                                                                      
+thequestions.txt     
+
+vagrant$ docker run --volume /vagrant:/vagrant ubuntu:14.04 cat /vagrant/joke.txt                                                                                                                  
+haha    
+vagrant$ echo appendsomestuff >> joke.txt                                                                                                                                                          
+vagrant$ cat joke.txt                                                                                                                                                                              
+haha                                                                                                                                                                                               
+appendsomestuff                                                                                                                                                                                    
+vagrant$ docker run --volume /vagrant:/vagrant ubuntu:14.04 cat /vagrant/joke.txt                                                                                                                  
+haha                                                                                                                                                                                               
+appendsomestuff                                                                                                                                                                                    
+vagrant$   
+```
+
+
+let's take a break before diving into `docker build`, with something will be obscenely easy, so easy you might be upset
+
+let's see how easy it is to run some real packaged app, e.g. wordpress
+
+https://registry.hub.docker.com/
+
+search for wordpress
+
+https://registry.hub.docker.com/_/wordpress/
+
+"If you'd like to be able to access the instance from the host without the container's IP, standard port mappings can be used:""
+
+`docker run --name some-wordpress --link some-mysql:mysql -p 8080:80 -d wordpress:3.9.2` 
+keeping in mind our version - 3.9.2
+
+ok, but we need a database first, looks like mysql
+
+k, go back and search for mysql
+
+https://registry.hub.docker.com/_/mysql/
+
+`docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=mysecretpassword -d mysql:5.7.4`
+keeping in mind our version - 5.7.4
+
+ok start the database up
+
+then go to - http://192.168.169.170:8080/
+
+log in, remembering password, create a post, do some stuff
+
+then stop containsers
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # `docker build`
-# `docker cp`
-# `docker diff`
-# `docker inspect`
+
+ok, let's do some more easy stuff
+
+want to try out spring boot?
+
+ok navigate to http://spring.io/guides/gs/spring-boot/
+
+
+a quick scan shows
+
+
+`git clone https://github.com/spring-guides/gs-spring-boot.git`
+
+cd into complete/
+
+
+
+"
+What you’ll need
+
+About 15 minutes
+A favorite text editor or IDE
+JDK 1.6 or later
+Gradle 1.11+ or Maven 3.0+ <--- don't know much about gradle, but i know it has a self intaller
+You can also import the code from this guide as well as view the web page directly into Spring Tool Suite (STS) and work your way through it from there.
+"
+
+and it's a webapp, how do we start it and what port will it serve up on as default?
+
+scrolled down to find - 
+
+./gradlew build && java -jar build/libs/gs-spring-boot-0.1.0.jar
+
+$ curl localhost:8080
+Greetings from Spring Boot!
+
+
+ok, let's start a Dockerfile --
+
+---------
+FROM ubuntu:14.04
+
+EXPOSE 8080
+
+ADD / /app
+
+WORKDIR /app
+
+CMD ./gradlew build && java -jar build/libs/gs-spring-boot-0.1.0.jar
+---------
+
+
+see if our good ol' trusty ubuntu:14.04 has what we need
+
+```
+
+complete$ docker run --interactive --tty --publish 8080:8080 --volume `pwd`:/app ubuntu:14.04 /bin/bash                               
+root@ff110a8754f8:/# javac - version                                                                                                                                                       
+bash: javac: command not found                                                                                                                                                                     
+root@ff110a8754f8:/# exit                                                                                                                                                                          
+exit                                                                                                                                                                            ```
+
+
+```
+complete$ docker run --interactive --tty --publish 8080:8080 java:8u40 /bin/bash                                                                                                                   
+root@1c2bec5902e3:/# javac --version                                                                                                                                                               
+javac: invalid flag: --version                                                                                                                                                                     
+Usage: javac <options> <source files>                                                                                                                                                              
+use -help for a list of possible options                                                                                                                                                           
+root@1c2bec5902e3:/# javac -version                                                                                                                                                                
+javac 1.8.0_40-internal                                                                                                                                                                            
+root@1c2bec5902e3:/#    
+
+```
+
+ok, so let's just change our dockerfile
+
+==========
+FROM java:8u40
+
+EXPOSE 8080
+
+ADD / /app
+
+WORKDIR /app
+
+CMD ./gradlew build && java -jar build/libs/gs-spring-boot-0.1.0.jar
+==========
+
+
+
+
+
+
 
