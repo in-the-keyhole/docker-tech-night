@@ -915,7 +915,7 @@ What you’ll need
 About 15 minutes
 A favorite text editor or IDE
 JDK 1.6 or later
-Gradle 1.11+ or Maven 3.0+ <--- don't know much about gradle, but i know it has a self intaller
+Gradle 1.11+ or Maven 3.0+ <--- don't know much about gradle, but i know it can bootstrap itself
 You can also import the code from this guide as well as view the web page directly into Spring Tool Suite (STS) and work your way through it from there.
 "
 
@@ -957,15 +957,34 @@ exit                                                                            
 
 ```
 complete$ docker run --interactive --tty --publish 8080:8080 java:8u40 /bin/bash                                                                                                                   
-root@1c2bec5902e3:/# javac --version                                                                                                                                                               
-javac: invalid flag: --version                                                                                                                                                                     
-Usage: javac <options> <source files>                                                                                                                                                              
-use -help for a list of possible options                                                                                                                                                           
-root@1c2bec5902e3:/# javac -version                                                                                                                                                                
+root@1c2bec5902e3:/# javac -version                                                                                                                                                               
 javac 1.8.0_40-internal                                                                                                                                                                            
-root@1c2bec5902e3:/#    
+root@d4d558fd1752:/# cd /app/                                                                                                                                                                      
+root@d4d558fd1752:/app# ./gradlew build && java -jar build/libs/gs-spring-boot-0.1.0.jar                                                                                                           
+Downloading http://services.gradle.org/distributions/gradle-1.11-bin.zip                                                                                                                           
+...................................................................................................................................................................................................
+                                                                                                                                                                                                   
+  .   ____          _            __ _ _                                                                                                                                                            
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \                                                                                                                                                           
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \                                                                                                                                                          
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )                                                                                                                                                         
+  '  |____| .__|_| |_|_| |_\__, | / / / /                                                                                                                                                          
+ =========|_|==============|___/=/_/_/_/                                                                                                                                                           
+ :: Spring Boot ::        (v1.1.6.RELEASE)                                                                                                                                                         
+                                            
+...
+
+tomcatEmbeddedServletContainerFactory                                                                                                                                                              
+traceEndpoint                                                                                                                                                                                      
+traceRepository                                                                                                                                                                                    
+viewControllerHandlerMapping                                                                                                                                                                       
+viewResolver                                                                                                                                                                                       
+webRequestLoggingFilter       
+
 
 ```
+
+
 
 ok, so let's just change our dockerfile
 
@@ -981,9 +1000,96 @@ WORKDIR /app
 CMD ./gradlew build && java -jar build/libs/gs-spring-boot-0.1.0.jar
 ==========
 
+docker run --interactive --tty --publish 8080:8080 --volume `pwd`:/app java:8u40 /bin/bash
+compared to the Dockerfile
+ok, so that ADD isn't quite the same as teh --volume, add is just a one time copy, but a lot of the concepts should feel similar
 
 
 
+```
+complete$ docker build .                                                                                                                                                                           
+Sending build context to Docker daemon 11.54 MB                                                                                                                                                    
+Sending build context to Docker daemon                                                                                                                                                             
+Step 0 : FROM java:8u40                                                                                                                                                                            
+ ---> c64588070549                                                                                                                                                                                 
+Step 1 : EXPOSE 8080                                                                                                                                                                               
+ ---> Using cache                                                                                                                                                                                  
+ ---> 6d3405883c8c                                                                                                                                                                                 
+Step 2 : ADD / /app                                                                                                                                                                                
+ ---> 3d2db45300cd                                                                                                                                                                                 
+Removing intermediate container fea5d0465f32                                                                                                                                                       
+Step 3 : WORKDIR /app                                                                                                                                                                              
+ ---> Running in 7c19a455c900                                                                                                                                                                      
+ ---> d82a5dadd677                                                                                                                                                                                 
+Removing intermediate container 7c19a455c900                                                                                                                                                       
+Step 4 : CMD ./gradlew build && java -jar build/libs/gs-spring-boot-0.1.0.jar                                                                                                                      
+ ---> Running in 025a9e8af6eb                                                                                                                                                                      
+ ---> 8fb79a51ff3e                                                                                                                                                                                 
+Removing intermediate container 025a9e8af6eb                                                                                                                                                       
+Successfully built 8fb79a51ff3e                                                                                                                                                                    
+complete$                       
+```
+
+
+
+
+let's build something else?  any suggestions?  what about grokola?
+i suggest that only i run it on one machine for the demo, since it has lots of downloads
+
+while that's building...
+
+
+back to that spring boot example
+
+wget https://services.gradle.org/distributions/gradle-2.1-all.zip
+unzip gradle-2.1-all.zip
+
+
+
+cover daemon cmds
+
+
+
+* then build another active project
+
+
+
+
+
+* then back to automated builds
+
+
+
+---------------
+FROM java:8u40
+
+EXPOSE 8080
+
+RUN wget https://services.gradle.org/distributions/gradle-2.1-all.zip
+RUN unzip gradle-2.1-all.zip
+
+ADD / /app
+
+WORKDIR /app
+
+CMD /gradle-2.1/bin/gradle build && java -jar build/libs/gs-spring-boot-0.1.0.jar
+---------------
+
+FROM java:8u40
+
+EXPOSE 8080
+
+RUN wget https://services.gradle.org/distributions/gradle-2.1-all.zip
+RUN unzip gradle-2.1-all.zip
+
+ADD / /app
+
+WORKDIR /app
+RUN /gradle-2.1/bin/gradle build
+
+CMD java -jar build/libs/gs-spring-boot-0.1.0.jar
+
+---------------
 
 
 
