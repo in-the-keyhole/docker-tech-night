@@ -2,11 +2,19 @@ first, a little housekeeping -
 
 copy these notes into a newly-created file /mynotes.txt
 
-```
+---
+
 export PS1="\W$ "
 while true ; do nc -l 9999 <<<MYNAMEGOESHERE ; done
 while true ; do nc -l 9999 < myfile.txt ; done
-```
+
+links:
+
+
+
+---
+
+open up a couple terminals, set prompt, navigate into /sandbox
 
 ---
 
@@ -21,6 +29,10 @@ while true ; do nc -l 9999 < myfile.txt ; done
 ---
 
 # `docker help`
+
+is docker installed?
+
+we'll cover blah, blah and blah
 
 ```
 sandbox$ docker help                                                                                                                                                                               
@@ -68,7 +80,8 @@ Commands:
 ```
 
 
-is docker installed?  what version are we using?
+
+what version are we using?
 # `docker version`
 
 ```
