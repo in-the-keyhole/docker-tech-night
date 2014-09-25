@@ -1,13 +1,16 @@
-`export PS1="\W$ "`
+# setup for projector-friendly ide and terminal
 
 zoom - 125%
 theme - white
 terminal: theme - man_page, font size - 20
 
+---
 
-`while true ; do nc -l 9999 < index.html ; done`
-
+`export PS1="\W$ "`
 `while true ; do nc -l 9999 <<<luke ; done`
+`while true ; do nc -l 9999 < myfile.txt ; done`
+
+
 
 
 is docker installed?  what version are we using?
