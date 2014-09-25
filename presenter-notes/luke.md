@@ -1,87 +1,29 @@
-first, a little housekeeping -
+
+vagrant up
+
+go to 192.168.169.170, recommend chrome
+
+git pull
 
 copy these notes into a newly-created file /mynotes.txt
 
----
-
+```
 export PS1="\W$ "
-while true ; do nc -l 9999 <<<MYNAMEGOESHERE ; done
-while true ; do nc -l 9999 < myfile.txt ; done
-
-links:
-
-
-
----
-
-open up a couple terminals, set prompt, navigate into /sandbox
-
----
-
-
-## my setup for projector-friendly ide and terminal
-
-- zoom - 125%
-- theme - white
-- terminal: theme - man_page
-
-
----
-
-# `docker help`
-
-is docker installed?
-
-we'll cover blah, blah and blah
-
-```
-sandbox$ docker help                                                                                                                                                                               
-Usage: docker [OPTIONS] COMMAND [arg...]                                                                                                                                                           
- -H=[unix:///var/run/docker.sock]: tcp://host:port to bind/connect to or unix://path/to/socket to use                                                                                              
-                                                                                                                                                                                                   
-A self-sufficient runtime for linux containers.                                                                                                                                                    
-                                                                                                                                                                                                   
-Commands:                                                                                                                                                                                          
-    attach    Attach to a running container                                                                                                                                                        
-    build     Build an image from a Dockerfile                                                                                                                                                     
-    commit    Create a new image from a container's changes                                                                                                                                        
-    cp        Copy files/folders from a container's filesystem to the host path                                                                                                                    
-    diff      Inspect changes on a container's filesystem                                                                                                                                          
-    events    Get real time events from the server                                                                                                                                                 
-    export    Stream the contents of a container as a tar archive                                                                                                                                  
-    history   Show the history of an image                                                                                                                                                         
-    images    List images                                                                                                                                                                          
-    import    Create a new filesystem image from the contents of a tarball                                                                                                                         
-    info      Display system-wide information                                                                                                                                                      
-    inspect   Return low-level information on a container                                                                                                                                          
-    kill      Kill a running container                                                                                                                                                             
-    load      Load an image from a tar archive                                                                                                                                                     
-    login     Register or log in to a Docker registry server                                                                                                                                       
-    logout    Log out from a Docker registry server                                                                                                                                                
-    logs      Fetch the logs of a container                                                                                                                                                        
-    port      Lookup the public-facing port that is NAT-ed to PRIVATE_PORT                                                                                                                         
-    pause     Pause all processes within a container                                                                                                                                               
-    ps        List containers                                                                                                                                                                      
-    pull      Pull an image or a repository from a Docker registry server                                                                                                                          
-    push      Push an image or a repository to a Docker registry server                                                                                                                            
-    restart   Restart a running container                                                                                                                                                          
-    rm        Remove one or more containers                                                                                                                                                        
-    rmi       Remove one or more images                                                                                                                                                            
-    run       Run a command in a new container                                                                                                                                                     
-    save      Save an image to a tar archive                                                                                                                                                       
-    search    Search for an image on the Docker Hub                                                                                                                                                
-    start     Start a stopped container                                                                                                                                                            
-    stop      Stop a running container                                                                                                                                                             
-    tag       Tag an image into a repository                                                                                                                                                       
-    top       Lookup the running processes of a container                                                                                                                                          
-    unpause   Unpause a paused container                                                                                                                                                           
-    version   Show the Docker version information                                                                                                                                                  
-    wait      Block until a container stops, then print its exit code                          
+while true ; do nc -l 9999 <<<luke ; done
+while true ; do nc -l 9999 < /app/myfile.txt ; done
 ```
 
+# setup for projector-friendly ide and terminal
+
+zoom - 125%
+theme - white
+terminal: theme - man_page, font size - 20
 
 
-what version are we using?
+---
+
+
+is docker installed?  what version are we using?
 # `docker version`
 
 ```
@@ -152,7 +94,6 @@ mongod --help for help and startup options
 ```
 
 is it running... (in another terminal)
-(ps == process status)
 
 ```
 vagrant$ docker ps                                                                                                                                         
@@ -745,11 +686,6 @@ Pushing tag for rev [87549b9a0458] on {https://cdn-registry-1.docker.io/v1/repos
 vagrant$    
 ```
 
-so, i published an app and shared with you
-
-
-
-
 
 # env vars
 
@@ -915,10 +851,10 @@ vagrant$ echo appendsomestuff >> joke.txt
 vagrant$ cat joke.txt                                                                                                                                                                              
 haha                                                                                                                                                                                               
 appendsomestuff                                                                                                                                                                                    
-vagrant$ docker run --volume /vagrant:/vagrant ubuntu:14.04 cat /vagrant/joke.txt                                                                                                                  
+vagrant$ docker run --volume `pwd`:`pwd` ubuntu:14.04 cat `pwd`/joke.txt                                                                                                                  
 haha                                                                                                                                                                                               
 appendsomestuff                                                                                                                                                                                    
-vagrant$   
+sandbox# docker run --volume `pwd`:`pwd` --publish 9999:9999 ubuntu:14.04 bash -c "while true ; do nc -l 9999 < `pwd`/myfile.txt ; done"        
 ```
 
 
@@ -1006,7 +942,9 @@ $ curl localhost:8080
 Greetings from Spring Boot!
 
 
-ok, let's start a Dockerfile --
+ok, let's start a Dockerfile, build goes hand in hand with dockerfile, and i think we'll see that we could already do a lot of what he dockerfile provides, minus the convenient packaging and maintenance and documentation --
+
+https://docs.docker.com/reference/builder/
 
 ---------
 FROM ubuntu:14.04
@@ -1133,8 +1071,6 @@ cover daemon cmds
 
 
 
-* then back to automated builds
-
 
 
 ---------------
@@ -1169,4 +1105,49 @@ CMD java -jar build/libs/gs-spring-boot-0.1.0.jar
 ---------------
 
 
-automated build
+
+# docker file run
+
+FROM ubuntu:14.04
+
+```
+RUN mkdir /files
+RUN touch /files/a
+RUN touch /files/b
+RUN touch /files/c
+RUN touch /files/d
+
+then docker history
+
+docker run cc2 ls /files
+```
+
+now let's run a node app
+
+google for 'heroku node js app'
+
+https://github.com/heroku/node-js-sample
+
+you clone it then run it, i bet you can figure it out...
+
+
+
+example
+```
+FROM node:0.10.30
+
+EXPOSE 5000
+
+ADD / /app
+
+WORKDIR /app
+RUN npm install
+CMD npm start
+
+```
+
+then `docker run --publish 5000:5000 a08`
+
+* then back to automated builds
+
+
