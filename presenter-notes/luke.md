@@ -745,6 +745,11 @@ Pushing tag for rev [87549b9a0458] on {https://cdn-registry-1.docker.io/v1/repos
 vagrant$    
 ```
 
+so, i published an app and shared with you
+
+
+
+
 
 # env vars
 
