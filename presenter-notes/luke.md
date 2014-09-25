@@ -1,10 +1,15 @@
+first, a little housekeeping -
+
 copy these notes into a newly-created file /mynotes.txt
 
 ```
 export PS1="\W$ "
-while true ; do nc -l 9999 <<<luke ; done
+while true ; do nc -l 9999 <<<MYNAMEGOESHERE ; done
 while true ; do nc -l 9999 < myfile.txt ; done
 ```
+
+---
+
 
 # setup for projector-friendly ide and terminal
 
