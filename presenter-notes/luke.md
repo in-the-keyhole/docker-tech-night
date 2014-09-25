@@ -152,6 +152,7 @@ mongod --help for help and startup options
 ```
 
 is it running... (in another terminal)
+(ps == process status)
 
 ```
 vagrant$ docker ps                                                                                                                                         
